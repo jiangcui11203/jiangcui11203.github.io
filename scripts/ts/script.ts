@@ -131,16 +131,12 @@ for (let i = 360; i >= 0; i -= 22.5) {
   // 如果存在，則用所述物件中指定的值替換隨機十六進位
   if (suspect) {
     fill = suspect.color;
-  } else {
-    fill = '006eff';
-    console.log(fill);
-  }
+  } 
 
   // 确保最后一个切片使用特定颜色，避免被覆盖
-  if (i === 0) {
-    console.log(xCoor);
-    console.log(yCoor);
-    console.log(flags);
+  if (i === 360) {
+    containerSlices.innerHTML += `<circle cx="50" cy="50" r="47" fill="#006eff"/>`;
+    continue;
   }
   // 建立路徑元素並將其附加到 SVG 容器
   const path = `

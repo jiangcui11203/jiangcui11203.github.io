@@ -129,4 +129,4 @@ import { SuspiciousMenger } from "./Suspicious.js";
     }
     
   }
-})
+})();

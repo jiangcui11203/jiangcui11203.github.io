@@ -132,4 +132,4 @@ import { SuspiciousMenger } from "./Suspicious.js";
             _a.setUpSpinWheel();
         })(),
         _a);
-});
+})();

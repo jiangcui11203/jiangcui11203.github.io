@@ -1,103 +1,24 @@
-"use strict";
-// target the SVG and the pin right next to it
+import { SuspiciousMenger } from "./Suspicious.js";
+// 定位 SVG 及其旁邊的引腳
 const containerSlices = document.querySelector('g#slices');
 const pin = document.querySelector('svg#pin');
-// immediately add simple dots around the wheel
+// 立即在方向盤周圍添加簡單的點
 for (let i = 0; i < 48; i += 1) {
     const transform = `rotate(${360 / 48 * i}), translate(0 -49.5), rotate(${-360 / 48 * i})`;
     const dot = `<circle r="0.5" cx="50" cy="50" fill="currentColor" transform="${transform}"/>`;
     containerSlices.innerHTML += dot;
 }
-// target the heading and the button
+// 定位標題和按鈕
 const heading = document.querySelector('h1');
 const spinButton = document.querySelector('button');
-// variable updated for the timeout
+// 更新超時變數
 let timeoutID;
-// utility functions returning a random integer in a range and a random hex value
+// 實用函數傳回一個範圍內的隨機整數和一個隨機十六進位值
 const randomInt = (min = 0, max = 16) => Math.floor(Math.random() * (max - min) + min);
-const randomHex = () => randomInt().toString(16);
-const suspicious = [
-    {
-        cname: '紅色+右手',
-        rotation: 22.5,
-        color: 'ff0000'
-    },
-    {
-        cname: '綠色+右手',
-        rotation: 45,
-        color: '008000'
-    },
-    {
-        cname: '黃色+右手',
-        rotation: 67.5,
-        color: 'ffff00'
-    },
-    {
-        cname: '藍色+右手',
-        rotation: 90,
-        color: '006eff'
-    },
-    {
-        cname: '紅色+左手',
-        rotation: 112.5,
-        color: 'ff0000'
-    },
-    {
-        cname: '綠色+左手',
-        rotation: 135,
-        color: '008000'
-    },
-    {
-        cname: '黃色+左手',
-        rotation: 157.5,
-        color: 'ffff00'
-    },
-    {
-        cname: '藍色+左手',
-        rotation: 180,
-        color: '006eff'
-    },
-    {
-        cname: '紅色+右腳',
-        rotation: 202.5,
-        color: 'ff0000'
-    },
-    {
-        cname: '綠色+右腳',
-        rotation: 225,
-        color: '008000'
-    },
-    {
-        cname: '黃色+右腳',
-        rotation: 247.5,
-        color: 'ffff00'
-    },
-    {
-        cname: '藍色+右腳',
-        rotation: 270,
-        color: '006eff'
-    },
-    {
-        cname: '紅色+左腳',
-        rotation: 292.5,
-        color: 'ff0000'
-    },
-    {
-        cname: '綠色+左腳',
-        rotation: 315,
-        color: '008000'
-    },
-    {
-        cname: '黃色+左腳',
-        rotation: 337.5,
-        color: 'ffff00'
-    },
-    {
-        cname: '藍色+左腳',
-        rotation: 360,
-        color: '006eff'
-    }
-];
+// const randomHex = () => randomInt().toString(16);
+// 整個腳本中使用的對象，描述顏色和 3 個特定的旋轉值
+// 這個想法是包含輪子周圍的三個切片，並使箭頭始終指向其中一個切片
+const suspicious = SuspiciousMenger.getSuspicious;
 // 在切片後面的圓圈添加隨機填滿顏色
 /* let randomFill = '';
 for (let i = 0; i < 6; i += 1) {
@@ -114,6 +35,7 @@ for (let i = 360; i >= 0; i -= 22.5) {
     let fill = '';
     // 如果遞減的變數i與其中一個物件的任意旋轉值匹配，則找到特定對象
     const suspect = suspicious.find(pairing => pairing.rotation === i);
+    console.log(suspect);
     // 如果存在，則用所述物件中指定的值替換隨機十六進位
     if (suspect) {
         fill = suspect.color;

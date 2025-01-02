@@ -35,7 +35,11 @@ h1.isHidden {
   visibility: hidden;
   transform: translateY(-1rem) scale(0);
 }
-
+.record {
+  text-align: center;
+  height: 5vh;
+  width: 5vh;
+}
 /* wheel positioned to the left of the page, and occupying 50% of whichever dimension is the biggest */
 svg#wheel {
   position: absolute;

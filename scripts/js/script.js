@@ -11,7 +11,6 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
-import { Record } from "./Record.js";
 import { SuspiciousMenger } from "./Suspicious.js";
 (function () {
     var _a;
@@ -113,7 +112,6 @@ import { SuspiciousMenger } from "./Suspicious.js";
                         this.pin.addEventListener('click', this.spinWheel.bind(this));
                         // clear the interval and set the boolean back to false
                         clearInterval(timeoutID);
-                        yield Record.addRecord(`${this.suspicious[randomSuspect].cname}`);
                     }), randomDuration * 1000);
                 });
             }

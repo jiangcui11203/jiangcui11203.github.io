@@ -126,7 +126,6 @@ import { SuspiciousMenger } from "./Suspicious.js";
     
         // clear the interval and set the boolean back to false
         clearInterval(timeoutID);
-        await Record.addRecord(`${this.suspicious[randomSuspect].cname}`);
       }, randomDuration * 1000);
     }
     

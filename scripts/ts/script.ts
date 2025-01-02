@@ -1,3 +1,4 @@
+import { Record } from "./Record.js";
 import { Suspicious } from "./Suspicious.js";
 import { SuspiciousMenger } from "./Suspicious.js";
 (function () {
@@ -79,7 +80,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
     }
     
     // function spinning the wheel
-    public static spinWheel() {
+    public static async spinWheel() {
       const randomDuration = this.randomInt(2, 3);
       // remove the event listener from the button and the wheel, to avoid running the function twice at the same time
       this.spinButton.removeEventListener('click', this.spinWheel.bind(this));
@@ -109,7 +110,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
       this.pin.style.animation = `pinWheel ${randomDuration / 10}s 10 ease-in-out`;
     
       // after the time allocated for the rotation show the heading with the "random" color, update the custom property with its value
-      let timeoutID = setTimeout(() => {
+      let timeoutID = setTimeout(async() => {
         this.heading.textContent = `${this.suspicious[randomSuspect].cname}`;
         this.heading.classList.remove('isHidden');
         this.pin.style.animation = '';
@@ -125,6 +126,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
     
         // clear the interval and set the boolean back to false
         clearInterval(timeoutID);
+        await Record.addRecord(`${this.suspicious[randomSuspect].cname}`);
       }, randomDuration * 1000);
     }
     

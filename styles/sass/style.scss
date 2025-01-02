@@ -30,16 +30,16 @@ h1 {
   transition: all 0.25s ease-in-out;
 }
 /* shown/hidden through an dedicated class */
-h1.isHidden {
+.isHidden {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-1rem) scale(0);
 }
 .record {
-  text-align: center;
-  height: 5vh;
-  width: 5vh;
+  width: 30vw;
+  height: 30vh;
 }
+
 /* wheel positioned to the left of the page, and occupying 50% of whichever dimension is the biggest */
 svg#wheel {
   position: absolute;

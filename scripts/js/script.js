@@ -11,6 +11,7 @@ var __setFunctionName = (this && this.__setFunctionName) || function (f, name, p
     if (typeof name === "symbol") name = name.description ? "[".concat(name.description, "]") : "";
     return Object.defineProperty(f, "name", { configurable: true, value: prefix ? "".concat(prefix, " ", name) : name });
 };
+import { Record } from "./Record.js";
 import { SuspiciousMenger } from "./Suspicious.js";
 (function () {
     var _a;
@@ -74,44 +75,47 @@ import { SuspiciousMenger } from "./Suspicious.js";
             }
             // function spinning the wheel
             static spinWheel() {
-                const randomDuration = this.randomInt(2, 3);
-                // remove the event listener from the button and the wheel, to avoid running the function twice at the same time
-                this.spinButton.removeEventListener('click', this.spinWheel.bind(this));
-                this.pin.removeEventListener('click', this.spinWheel.bind(this));
-                // immediately hide the heading showing the matching color
-                this.heading.classList.add('isHidden');
-                // 在圖釘和按鈕中新增一個類，以顯示如何不應單擊它們
-                this.pin.classList.add('isSpinning');
-                this.spinButton.classList.add('isSpinning');
-                // 建立旋轉持續時間的變量，以及輪子實現的旋轉次數
-                const randomRotate = this.randomInt(10, 20);
-                // 建立一個變數以隨機從其中一個物件中選取
-                const randomSuspect = this.randomInt(0, this.suspicious.length);
-                // 應用過渡和變換屬性
-                this.containerSlices.style.transformOrigin = '50%';
-                this.containerSlices.style.transition = `transform ${randomDuration}s ease-out`;
-                /* 對於旋轉，除了任意 x360 旋轉之外，請記住
-               - 添加 90 以匹配箭頭的位置（在滾輪的最右側）
-               - 減去切片的旋轉
-               - 新增一個切片，使箭頭點位於切片的邊界內
-                */
-                this.containerSlices.style.transform = `rotate(${randomRotate * 360 - this.suspicious[randomSuspect].rotation + 90 + this.randomInt(0, 360 / 24)}deg)`;
-                this.pin.style.animation = `pinWheel ${randomDuration / 10}s 10 ease-in-out`;
-                // after the time allocated for the rotation show the heading with the "random" color, update the custom property with its value
-                let timeoutID = setTimeout(() => {
-                    this.heading.textContent = `${this.suspicious[randomSuspect].cname}`;
-                    this.heading.classList.remove('isHidden');
-                    this.pin.style.animation = '';
-                    document.documentElement.style.setProperty('--color-theme', `#${this.suspicious[randomSuspect].color}`);
-                    // remove the class on the pin and button showing the forbidden cursor
-                    this.pin.classList.remove('isSpinning');
-                    this.spinButton.classList.remove('isSpinning');
-                    // reset the event listener on the button and the pin
-                    this.spinButton.addEventListener('click', this.spinWheel.bind(this));
-                    this.pin.addEventListener('click', this.spinWheel.bind(this));
-                    // clear the interval and set the boolean back to false
-                    clearInterval(timeoutID);
-                }, randomDuration * 1000);
+                return __awaiter(this, void 0, void 0, function* () {
+                    const randomDuration = this.randomInt(2, 3);
+                    // remove the event listener from the button and the wheel, to avoid running the function twice at the same time
+                    this.spinButton.removeEventListener('click', this.spinWheel.bind(this));
+                    this.pin.removeEventListener('click', this.spinWheel.bind(this));
+                    // immediately hide the heading showing the matching color
+                    this.heading.classList.add('isHidden');
+                    // 在圖釘和按鈕中新增一個類，以顯示如何不應單擊它們
+                    this.pin.classList.add('isSpinning');
+                    this.spinButton.classList.add('isSpinning');
+                    // 建立旋轉持續時間的變量，以及輪子實現的旋轉次數
+                    const randomRotate = this.randomInt(10, 20);
+                    // 建立一個變數以隨機從其中一個物件中選取
+                    const randomSuspect = this.randomInt(0, this.suspicious.length);
+                    // 應用過渡和變換屬性
+                    this.containerSlices.style.transformOrigin = '50%';
+                    this.containerSlices.style.transition = `transform ${randomDuration}s ease-out`;
+                    /* 對於旋轉，除了任意 x360 旋轉之外，請記住
+                   - 添加 90 以匹配箭頭的位置（在滾輪的最右側）
+                   - 減去切片的旋轉
+                   - 新增一個切片，使箭頭點位於切片的邊界內
+                    */
+                    this.containerSlices.style.transform = `rotate(${randomRotate * 360 - this.suspicious[randomSuspect].rotation + 90 + this.randomInt(0, 360 / 24)}deg)`;
+                    this.pin.style.animation = `pinWheel ${randomDuration / 10}s 10 ease-in-out`;
+                    // after the time allocated for the rotation show the heading with the "random" color, update the custom property with its value
+                    let timeoutID = setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                        this.heading.textContent = `${this.suspicious[randomSuspect].cname}`;
+                        this.heading.classList.remove('isHidden');
+                        this.pin.style.animation = '';
+                        document.documentElement.style.setProperty('--color-theme', `#${this.suspicious[randomSuspect].color}`);
+                        // remove the class on the pin and button showing the forbidden cursor
+                        this.pin.classList.remove('isSpinning');
+                        this.spinButton.classList.remove('isSpinning');
+                        // reset the event listener on the button and the pin
+                        this.spinButton.addEventListener('click', this.spinWheel.bind(this));
+                        this.pin.addEventListener('click', this.spinWheel.bind(this));
+                        // clear the interval and set the boolean back to false
+                        clearInterval(timeoutID);
+                        yield Record.addRecord(`${this.suspicious[randomSuspect].cname}`);
+                    }), randomDuration * 1000);
+                });
             }
         },
         __setFunctionName(_a, "_"),

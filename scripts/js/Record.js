@@ -16,4 +16,13 @@ export class Record {
             element.appendChild(child);
         });
     }
+    static removeRecord() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const element = document.querySelector("div.record");
+            const child = document.querySelectorAll("h2");
+            child.forEach((e) => {
+                element.removeChild(e);
+            });
+        });
+    }
 }

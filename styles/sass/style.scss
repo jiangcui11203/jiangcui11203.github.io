@@ -22,6 +22,7 @@ body {
   color: var(--color-theme);
   font-family: var(--font);
 }
+
 /* heading centered atop the page */
 h1 {
   text-align: center;
@@ -29,12 +30,14 @@ h1 {
   font-size: 3rem;
   transition: all 0.25s ease-in-out;
 }
+
 /* shown/hidden through an dedicated class */
 .isHidden {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-1rem) scale(0);
 }
+
 .record {
   width: 30vw;
   height: 30vh;
@@ -72,11 +75,14 @@ svg#pin {
   padding: 1rem;
   left: 50%;
 }
+
 .instructions h2 {
   font-size: 2rem;
   letter-spacing: 0.1rem;
   position: relative;
-}/* 
+}
+
+/* 
  在一個愚蠢的感嘆號旁邊在句子中間添加一個簡單的詞，暗示該項目的無辜性質 
 .instructions h2:after {
   content: "!";
@@ -103,25 +109,31 @@ svg#pin {
   background: var(--color-bg);
   /* transition for a simple hover and active state */
   transition: all 0.5s ease-out;
+  z-index: 2;
 }
+
 .instructions button:hover {
   box-shadow: 0 0 0 1px var(--color-bg), 0 0 0 3px currentColor,
     0 0 0 5px var(--color-bg), 0 0 0 7px currentColor;
 }
+
 .instructions button:active {
   box-shadow: 0 0 0 2px currentColor, 0 0 0 4px var(--color-bg),
     0 0 0 6px currentColor;
   transform: scale(0.95) translateY(0.1rem);
 }
+
 /* cursor customized to grab, and not allowed when the wheel is spinning (class added in JS) */
 .instructions button,
 svg#pin {
   cursor: grab;
 }
+
 .instructions button.isSpinning,
 svg#pin.isSpinning {
   cursor: not-allowed;
 }
+
 /*
 animation for the pin, to have it soundly move up and down alongside the spinning wheel
 the duration of the animation is customized in JS to have it run a certain number of times
@@ -130,6 +142,7 @@ the duration of the animation is customized in JS to have it run a certain numbe
   33% {
     transform: translateY(-50%) rotate(-10deg);
   }
+
   67% {
     transform: translateY(-50%) rotate(10deg);
   }

@@ -1,87 +1,95 @@
 export class SuspiciousMenger {
-    static get getSuspicious() {
-        return this.suspicious;
+    static get getDeadSuspicious() {
+        return this.deadSuspicious;
+    }
+    static get getColors() {
+        return this.color;
+    }
+    static get getBodyPart() {
+        return this.bodyPart;
     }
 }
-SuspiciousMenger.suspicious = [
+SuspiciousMenger.deadSuspicious = [
     {
-        cname: '紅色+右手',
-        rotation: 22.5,
+        cname: '紅色',
+        bodyPart: '右手',
         color: 'ff0000'
     },
     {
-        cname: '綠色+右手',
-        rotation: 45,
+        cname: '綠色',
+        bodyPart: '右手',
         color: '008000'
     },
     {
-        cname: '黃色+右手',
-        rotation: 67.5,
+        cname: '黃色',
+        bodyPart: '右手',
         color: 'ffff00'
     },
     {
-        cname: '藍色+右手',
-        rotation: 90,
+        cname: '藍色',
+        bodyPart: '右手',
         color: '006eff'
     },
     {
-        cname: '紅色+左手',
-        rotation: 112.5,
+        cname: '紅色',
+        bodyPart: '左手',
         color: 'ff0000'
     },
     {
-        cname: '綠色+左手',
-        rotation: 135,
+        cname: '綠色',
+        bodyPart: '左手',
         color: '008000'
     },
     {
-        cname: '黃色+左手',
-        rotation: 157.5,
+        cname: '黃色',
+        bodyPart: '左手',
         color: 'ffff00'
     },
     {
-        cname: '藍色+左手',
-        rotation: 180,
+        cname: '藍色',
+        bodyPart: '左手',
         color: '006eff'
     },
     {
-        cname: '紅色+右腳',
-        rotation: 202.5,
+        cname: '紅色',
+        bodyPart: '右腳',
         color: 'ff0000'
     },
     {
-        cname: '綠色+右腳',
-        rotation: 225,
+        cname: '綠色',
+        bodyPart: '右腳',
         color: '008000'
     },
     {
-        cname: '黃色+右腳',
-        rotation: 247.5,
+        cname: '黃色',
+        bodyPart: '右腳',
         color: 'ffff00'
     },
     {
-        cname: '藍色+右腳',
-        rotation: 270,
+        cname: '藍色',
+        bodyPart: '右腳',
         color: '006eff'
     },
     {
-        cname: '紅色+左腳',
-        rotation: 292.5,
+        cname: '紅色',
+        bodyPart: '左腳',
         color: 'ff0000'
     },
     {
-        cname: '綠色+左腳',
-        rotation: 315,
+        cname: '綠色',
+        bodyPart: '左腳',
         color: '008000'
     },
     {
-        cname: '黃色+左腳',
-        rotation: 337.5,
+        cname: '黃色',
+        bodyPart: '左腳',
         color: 'ffff00'
     },
     {
-        cname: '藍色+左腳',
-        rotation: 360,
+        cname: '藍色',
+        bodyPart: '左腳',
         color: '006eff'
     }
 ];
+SuspiciousMenger.color = [{ cname: '藍色', color: '006eff' }, { cname: '紅色', color: 'ff0000' }, { cname: '綠色', color: '008000' }, { cname: '黃色', color: 'ffff00' }];
+SuspiciousMenger.bodyPart = [{ bodyPart: '右手' }, { bodyPart: '左手' }, { bodyPart: '右腳' }, { bodyPart: '左腳' }];

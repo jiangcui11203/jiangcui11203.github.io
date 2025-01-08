@@ -97,10 +97,21 @@ import { SuspiciousMenger } from "./Suspicious.js";
           <path d="M 50 50 L 50 3 A 47 47 ${flags} ${xCoor} ${yCoor}" fill=#${fill} style="z-index: ${zIndex};" />
         `;
         this.containerSlices.innerHTML += path;
+
+      }
+      for (let i = 45; i < 360; i += 90) {
+        // 在每个切片的中心添加文字（例如 "右手"、"左脚" 等）
+        const centerX = 50 + Math.sin(i * Math.PI / 180) * 23;  // 设置文字的X坐标
+        const centerY = 50 - Math.cos(i * Math.PI / 180) * 23;  // 设置文字的Y坐标
+        const bodyPartText = this.bodyPart[(i-45)/90].bodyPart;  // 获取对应的身体部位名称（如 "右手"、"左脚"）
+
+        this.containerSlices.innerHTML += `
+        <text x="${centerX}" y="${centerY}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="black"">
+          ${bodyPartText}
+        </text>
+      `;
       }
     }
-
-
 
     // function spinning the wheel
     public static async spinWheel(): Promise<void> {
@@ -141,8 +152,8 @@ import { SuspiciousMenger } from "./Suspicious.js";
         if (this.color.length === 0) this.color = SuspiciousMenger.getColors;
         if (this.bodyPart.length === 0) this.bodyPart = SuspiciousMenger.getBodyPart;
       } */
-      suspectColor = this.color[this.randomInt(0,this.color.length - 1)];
-      suspectBodyPart = this.bodyPart[this.randomInt(0,this.bodyPart.length - 1)];
+      suspectColor = this.color[this.randomInt(0, this.color.length - 1)];
+      suspectBodyPart = this.bodyPart[this.randomInt(0, this.bodyPart.length - 1)];
       this.color = this.color.filter(item => item !== suspectColor);
       this.bodyPart = this.bodyPart.filter(item => item !== suspectBodyPart);
       if (this.color.length === 0) this.color = SuspiciousMenger.getColors;

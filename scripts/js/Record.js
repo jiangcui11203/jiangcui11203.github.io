@@ -13,16 +13,20 @@ export class Record {
             const element = document.querySelector("div.record");
             const child = document.createElement("h2");
             child.innerText = string;
+            child.id = "id";
             element.appendChild(child);
         });
     }
     static removeRecord() {
         return __awaiter(this, void 0, void 0, function* () {
             const element = document.querySelector("div.record");
-            const child = document.querySelectorAll("h2");
-            child.forEach((e) => {
-                element.removeChild(e);
-            });
+            while (true) {
+                let child = document.querySelector("h2#id");
+                if (child)
+                    element.removeChild(child);
+                else
+                    return;
+            }
         });
     }
 }

@@ -175,7 +175,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
         _a.pin = document.querySelector('svg#pin'),
         // 定位標題和按鈕
         _a.heading = document.querySelector('h1'),
-        _a.spinButton = document.querySelector('button'),
+        _a.spinButton = document.querySelector('button#spin'),
         // 整個腳本中使用的對象，描述顏色和16個特定的旋轉值
         // 這個想法是包含輪子周圍的三個切片，並使箭頭始終指向其中一個切片
         _a.deadSuspicious = SuspiciousMenger.getDeadSuspicious,
@@ -184,11 +184,12 @@ import { SuspiciousMenger } from "./Suspicious.js";
         (() => {
             // attach a click event listener on the button, at which point call the spinWheel function
             _a.spinButton.onclick = () => __awaiter(_a, void 0, void 0, function* () {
+                console.log(document.querySelector("h2#id"));
                 _a.setDisabled(true);
                 _a.spinWheel();
             });
+            document.querySelector('button#clear').onclick = () => __awaiter(_a, void 0, void 0, function* () { return Record.removeRecord(); });
             // call the same function when pressing the pin
-            _a.pin.addEventListener('click', _a.spinWheel.bind(_a));
             _a.setUpSpinWheel();
         })(),
         _a);

@@ -8,7 +8,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
     static pin: HTMLElement = document.querySelector('svg#pin') as HTMLElement;
     // 定位標題和按鈕
     static heading: HTMLElement = document.querySelector('h1') as HTMLElement;
-    static spinButton: HTMLButtonElement = document.querySelector('button') as HTMLButtonElement;
+    static spinButton: HTMLButtonElement = document.querySelector('button#spin') as HTMLButtonElement;
     // 整個腳本中使用的對象，描述顏色和16個特定的旋轉值
     // 這個想法是包含輪子周圍的三個切片，並使箭頭始終指向其中一個切片
     static deadSuspicious: Suspicious[] = SuspiciousMenger.getDeadSuspicious;
@@ -17,11 +17,12 @@ import { SuspiciousMenger } from "./Suspicious.js";
     static {
       // attach a click event listener on the button, at which point call the spinWheel function
       this.spinButton.onclick = async () => {
+        console.log(document.querySelector("h2#id"));
         this.setDisabled(true);
         this.spinWheel();
       };
+      (document.querySelector('button#clear') as HTMLButtonElement).onclick = async () => Record.removeRecord();
       // call the same function when pressing the pin
-      this.pin.addEventListener('click', this.spinWheel.bind(this));
       this.setUpSpinWheel();
     }
     private static async setDisabled(bool: boolean): Promise<void> {

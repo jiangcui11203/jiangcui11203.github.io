@@ -184,7 +184,6 @@ import { SuspiciousMenger } from "./Suspicious.js";
         (() => {
             // attach a click event listener on the button, at which point call the spinWheel function
             _a.spinButton.onclick = () => __awaiter(_a, void 0, void 0, function* () {
-                console.log(document.querySelector("h2#id"));
                 _a.setDisabled(true);
                 _a.spinWheel();
             });

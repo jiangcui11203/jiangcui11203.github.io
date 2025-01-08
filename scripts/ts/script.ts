@@ -17,7 +17,6 @@ import { SuspiciousMenger } from "./Suspicious.js";
     static {
       // attach a click event listener on the button, at which point call the spinWheel function
       this.spinButton.onclick = async () => {
-        console.log(document.querySelector("h2#id"));
         this.setDisabled(true);
         this.spinWheel();
       };

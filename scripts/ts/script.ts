@@ -16,13 +16,16 @@ import { SuspiciousMenger } from "./Suspicious.js";
     static bodyPart = SuspiciousMenger.getBodyPart;
     static {
       // attach a click event listener on the button, at which point call the spinWheel function
-      this.spinButton.onclick = async () => {
+      this.setUpButtonEvent();
+      // call the same function when pressing the pin
+      this.setUpSpinWheel();
+    }
+    private static async setUpButtonEvent(): Promise<void> {
+      this.spinButton.onclick = () => {
         this.setDisabled(true);
         this.spinWheel();
       };
-      (document.querySelector('button#clear') as HTMLButtonElement).onclick = async () => Record.removeRecord();
-      // call the same function when pressing the pin
-      this.setUpSpinWheel();
+      (document.querySelector('button#clear') as HTMLButtonElement).onclick = () => Record.removeRecord();
     }
     private static async setDisabled(bool: boolean): Promise<void> {
       bool ? this.spinButton.classList.add("isHidden") : this.spinButton.classList.remove("isHidden");
@@ -32,8 +35,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
       await this.addSlices();
     }
 
-    // 立即在方向盤周圍添加簡單的點
-    private static async adddots(): Promise<void> {
+    private static async adddots(): Promise<void> { // 立即在方向盤周圍添加簡單的點
       for (let i = 0; i < 48; i += 1) {
         const transform = `rotate(${360 / 48 * i}), translate(0 -49.5), rotate(${-360 / 48 * i})`;
         const dot = `<circle r="0.5" cx="50" cy="50" fill="currentColor" transform="${transform}"/>`;
@@ -41,13 +43,9 @@ import { SuspiciousMenger } from "./Suspicious.js";
       }
     }
 
-
-    // 實用函數傳回一個範圍內的隨機整數和一個隨機十六進位值
-    private static randomInt(min: number = 0, max: number = 16): number {
+    private static randomInt(min: number, max: number): number {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    // 更新超時變數
-
     // 在切片後面的圓圈添加隨機填滿顏色
     /* let randomFill = '';
     for (let i = 0; i < 6; i += 1) {
@@ -103,7 +101,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
         // 在每个切片的中心添加文字（例如 "右手"、"左脚" 等）
         const centerX = 50 + Math.sin(i * Math.PI / 180) * 23;  // 设置文字的X坐标
         const centerY = 50 - Math.cos(i * Math.PI / 180) * 23;  // 设置文字的Y坐标
-        const bodyPartText = this.bodyPart[(i-45)/90].bodyPart;  // 获取对应的身体部位名称（如 "右手"、"左脚"）
+        const bodyPartText = this.bodyPart[(i - 45) / 90].bodyPart;  // 获取对应的身体部位名称（如 "右手"、"左脚"）
 
         this.containerSlices.innerHTML += `
         <text x="${centerX}" y="${centerY}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="black"">
@@ -113,6 +111,9 @@ import { SuspiciousMenger } from "./Suspicious.js";
       }
     }
 
+    private static removeItem<T>(array: T[], item: T): T[] {
+      return array.filter(i => i !== item);
+    }
     // function spinning the wheel
     public static async spinWheel(): Promise<void> {
       // 隨機轉盤持續時間
@@ -154,8 +155,8 @@ import { SuspiciousMenger } from "./Suspicious.js";
       } */
       suspectColor = this.color[this.randomInt(0, this.color.length - 1)];
       suspectBodyPart = this.bodyPart[this.randomInt(0, this.bodyPart.length - 1)];
-      this.color = this.color.filter(item => item !== suspectColor);
-      this.bodyPart = this.bodyPart.filter(item => item !== suspectBodyPart);
+      this.color = this.removeItem(this.color, suspectColor);
+      this.bodyPart = this.removeItem(this.bodyPart, suspectBodyPart);
       if (this.color.length === 0) this.color = SuspiciousMenger.getColors;
       if (this.bodyPart.length === 0) this.bodyPart = SuspiciousMenger.getBodyPart;
       let rotation: number = 0;

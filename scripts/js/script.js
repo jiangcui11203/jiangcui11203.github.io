@@ -16,6 +16,15 @@ import { SuspiciousMenger } from "./Suspicious.js";
 (function () {
     var _a;
     const _ = (_a = class {
+            static setUpButtonEvent() {
+                return __awaiter(this, void 0, void 0, function* () {
+                    this.spinButton.onclick = () => {
+                        this.setDisabled(true);
+                        this.spinWheel();
+                    };
+                    document.querySelector('button#clear').onclick = () => Record.removeRecord();
+                });
+            }
             static setDisabled(bool) {
                 return __awaiter(this, void 0, void 0, function* () {
                     bool ? this.spinButton.classList.add("isHidden") : this.spinButton.classList.remove("isHidden");
@@ -27,7 +36,6 @@ import { SuspiciousMenger } from "./Suspicious.js";
                     yield this.addSlices();
                 });
             }
-            // 立即在方向盤周圍添加簡單的點
             static adddots() {
                 return __awaiter(this, void 0, void 0, function* () {
                     for (let i = 0; i < 48; i += 1) {
@@ -37,11 +45,9 @@ import { SuspiciousMenger } from "./Suspicious.js";
                     }
                 });
             }
-            // 實用函數傳回一個範圍內的隨機整數和一個隨機十六進位值
-            static randomInt(min = 0, max = 16) {
+            static randomInt(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
             }
-            // 更新超時變數
             // 在切片後面的圓圈添加隨機填滿顏色
             /* let randomFill = '';
             for (let i = 0; i < 6; i += 1) {
@@ -98,6 +104,9 @@ import { SuspiciousMenger } from "./Suspicious.js";
                     }
                 });
             }
+            static removeItem(array, item) {
+                return array.filter(i => i !== item);
+            }
             // function spinning the wheel
             static spinWheel() {
                 return __awaiter(this, void 0, void 0, function* () {
@@ -138,8 +147,8 @@ import { SuspiciousMenger } from "./Suspicious.js";
                     } */
                     suspectColor = this.color[this.randomInt(0, this.color.length - 1)];
                     suspectBodyPart = this.bodyPart[this.randomInt(0, this.bodyPart.length - 1)];
-                    this.color = this.color.filter(item => item !== suspectColor);
-                    this.bodyPart = this.bodyPart.filter(item => item !== suspectBodyPart);
+                    this.color = this.removeItem(this.color, suspectColor);
+                    this.bodyPart = this.removeItem(this.bodyPart, suspectBodyPart);
                     if (this.color.length === 0)
                         this.color = SuspiciousMenger.getColors;
                     if (this.bodyPart.length === 0)
@@ -194,11 +203,7 @@ import { SuspiciousMenger } from "./Suspicious.js";
         _a.bodyPart = SuspiciousMenger.getBodyPart,
         (() => {
             // attach a click event listener on the button, at which point call the spinWheel function
-            _a.spinButton.onclick = () => __awaiter(_a, void 0, void 0, function* () {
-                _a.setDisabled(true);
-                _a.spinWheel();
-            });
-            document.querySelector('button#clear').onclick = () => __awaiter(_a, void 0, void 0, function* () { return Record.removeRecord(); });
+            _a.setUpButtonEvent();
             // call the same function when pressing the pin
             _a.setUpSpinWheel();
         })(),
